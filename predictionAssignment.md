@@ -1,10 +1,10 @@
 # Coursera: Practical Machine Learning Prediction Assignment
-Benjamin Chan [GitHub](https://github.com/benjamin-chan)  
+Daniel Emaasit [GitHub](https://github.com/emaasit)  
 
 
 ```
-## Run time: 2014-10-23 15:40:34
-## R version: R version 3.1.1 (2014-07-10)
+## Run time: 2014-10-25 16:19:36
+## R version: R version 3.0.2 (2013-09-25)
 ```
 
 > **Background**
@@ -47,6 +47,10 @@ require(data.table)
 
 ```
 ## Loading required package: data.table
+```
+
+```
+## Warning: package 'data.table' was built under R version 3.0.3
 ```
 
 ```r
@@ -161,8 +165,26 @@ require(caret)
 
 ```
 ## Loading required package: caret
+```
+
+```
+## Warning: package 'caret' was built under R version 3.0.3
+```
+
+```
 ## Loading required package: lattice
+```
+
+```
+## Warning: package 'lattice' was built under R version 3.0.3
+```
+
+```
 ## Loading required package: ggplot2
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.0.3
 ```
 
 ```r
@@ -245,25 +267,29 @@ histGroup(DTrainCS, "belt")
 ## Loading required package: reshape2
 ```
 
-![plot of chunk histGroup](./predictionAssignment_files/figure-html/histGroup1.png) 
+```
+## Warning: package 'reshape2' was built under R version 3.0.3
+```
+
+![](./predictionAssignment_files/figure-html/histGroup-1.png) 
 
 ```r
 histGroup(DTrainCS, "[^(fore)]arm")
 ```
 
-![plot of chunk histGroup](./predictionAssignment_files/figure-html/histGroup2.png) 
+![](./predictionAssignment_files/figure-html/histGroup-2.png) 
 
 ```r
 histGroup(DTrainCS, "dumbbell")
 ```
 
-![plot of chunk histGroup](./predictionAssignment_files/figure-html/histGroup3.png) 
+![](./predictionAssignment_files/figure-html/histGroup-3.png) 
 
 ```r
 histGroup(DTrainCS, "forearm")
 ```
 
-![plot of chunk histGroup](./predictionAssignment_files/figure-html/histGroup4.png) 
+![](./predictionAssignment_files/figure-html/histGroup-4.png) 
 
 
 # Train a prediction model
@@ -289,8 +315,26 @@ require(doParallel)
 
 ```
 ## Loading required package: doParallel
+```
+
+```
+## Warning: package 'doParallel' was built under R version 3.0.3
+```
+
+```
 ## Loading required package: foreach
+```
+
+```
+## Warning: package 'foreach' was built under R version 3.0.3
+```
+
+```
 ## Loading required package: iterators
+```
+
+```
+## Warning: package 'iterators' was built under R version 3.0.3
 ```
 
 ```r
@@ -317,13 +361,21 @@ system.time(trainingModel <- train(classe ~ ., data=DTrainCS, method=method))
 
 ```
 ## Loading required package: randomForest
+```
+
+```
+## Warning: package 'randomForest' was built under R version 3.0.3
+```
+
+```
 ## randomForest 4.6-10
 ## Type rfNews() to see new features/changes/bug fixes.
+## Loading required namespace: e1071
 ```
 
 ```
 ##    user  system elapsed 
-##   50.36    0.18 1482.91
+##   46.36    2.61 1678.73
 ```
 
 Stop the clusters.
@@ -355,9 +407,9 @@ trainingModel
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa  Accuracy SD  Kappa SD
-##    2    1         1      0.002        0.002   
-##   27    1         1      0.002        0.002   
-##   52    1         1      0.004        0.006   
+##    2    0.986     0.982  0.00170      0.00216 
+##   27    0.987     0.984  0.00178      0.00226 
+##   52    0.978     0.972  0.00466      0.00590 
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was mtry = 27.
@@ -380,26 +432,26 @@ confusionMatrix(hat, DTrain[, classe])
 ##          E    0    0    0    0 2165
 ## 
 ## Overall Statistics
-##                                 
-##                Accuracy : 1     
-##                  95% CI : (1, 1)
-##     No Information Rate : 0.284 
-##     P-Value [Acc > NIR] : <2e-16
-##                                 
-##                   Kappa : 1     
-##  Mcnemar's Test P-Value : NA    
+##                                      
+##                Accuracy : 1          
+##                  95% CI : (0.9997, 1)
+##     No Information Rate : 0.2843     
+##     P-Value [Acc > NIR] : < 2.2e-16  
+##                                      
+##                   Kappa : 1          
+##  Mcnemar's Test P-Value : NA         
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity             1.000    1.000    1.000    1.000    1.000
-## Specificity             1.000    1.000    1.000    1.000    1.000
-## Pos Pred Value          1.000    1.000    1.000    1.000    1.000
-## Neg Pred Value          1.000    1.000    1.000    1.000    1.000
-## Prevalence              0.284    0.194    0.174    0.164    0.184
-## Detection Rate          0.284    0.194    0.174    0.164    0.184
-## Detection Prevalence    0.284    0.194    0.174    0.164    0.184
-## Balanced Accuracy       1.000    1.000    1.000    1.000    1.000
+## Sensitivity            1.0000   1.0000   1.0000   1.0000   1.0000
+## Specificity            1.0000   1.0000   1.0000   1.0000   1.0000
+## Pos Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
+## Neg Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
+## Prevalence             0.2843   0.1935   0.1744   0.1639   0.1838
+## Detection Rate         0.2843   0.1935   0.1744   0.1639   0.1838
+## Detection Prevalence   0.2843   0.1935   0.1744   0.1639   0.1838
+## Balanced Accuracy      1.0000   1.0000   1.0000   1.0000   1.0000
 ```
 
 ## Evaluate the model on the probing dataset
@@ -422,26 +474,26 @@ confusionMatrix(hat, DProbeCS[, classe])
 ##          E    1    0    0    1 1426
 ## 
 ## Overall Statistics
-##                                         
-##                Accuracy : 0.991         
-##                  95% CI : (0.988, 0.993)
-##     No Information Rate : 0.284         
-##     P-Value [Acc > NIR] : <2e-16        
-##                                         
-##                   Kappa : 0.988         
-##  Mcnemar's Test P-Value : NA            
+##                                           
+##                Accuracy : 0.9906          
+##                  95% CI : (0.9882, 0.9926)
+##     No Information Rate : 0.2845          
+##     P-Value [Acc > NIR] : < 2.2e-16       
+##                                           
+##                   Kappa : 0.9881          
+##  Mcnemar's Test P-Value : NA              
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity             0.999    0.987    0.989    0.984    0.989
-## Specificity             0.997    0.998    0.996    0.998    1.000
-## Pos Pred Value          0.993    0.993    0.979    0.988    0.999
-## Neg Pred Value          1.000    0.997    0.998    0.997    0.998
-## Prevalence              0.284    0.193    0.174    0.164    0.184
-## Detection Rate          0.284    0.191    0.172    0.161    0.182
-## Detection Prevalence    0.286    0.192    0.176    0.163    0.182
-## Balanced Accuracy       0.998    0.993    0.992    0.991    0.994
+## Sensitivity            0.9991   0.9868   0.9890   0.9837   0.9889
+## Specificity            0.9971   0.9983   0.9955   0.9976   0.9997
+## Pos Pred Value         0.9929   0.9927   0.9790   0.9875   0.9986
+## Neg Pred Value         0.9996   0.9968   0.9977   0.9968   0.9975
+## Prevalence             0.2845   0.1935   0.1744   0.1639   0.1838
+## Detection Rate         0.2842   0.1909   0.1724   0.1612   0.1817
+## Detection Prevalence   0.2863   0.1923   0.1761   0.1633   0.1820
+## Balanced Accuracy      0.9981   0.9925   0.9923   0.9906   0.9943
 ```
 
 ## Display the final model
@@ -457,26 +509,26 @@ varImp(trainingModel)
 ##   only 20 most important variables shown (out of 52)
 ## 
 ##                      Overall
-## roll_belt             100.00
-## pitch_forearm          59.81
-## yaw_belt               54.35
-## pitch_belt             45.92
-## magnet_dumbbell_z      43.76
-## roll_forearm           43.52
-## magnet_dumbbell_y      43.32
-## accel_dumbbell_y       22.41
-## roll_dumbbell          18.30
-## magnet_dumbbell_x      17.99
-## accel_forearm_x        17.50
-## accel_belt_z           14.59
-## magnet_belt_z          14.43
-## accel_dumbbell_z       13.94
-## magnet_forearm_z       13.91
-## total_accel_dumbbell   13.20
-## magnet_belt_y          12.33
-## yaw_arm                11.81
-## gyros_belt_z           11.18
-## magnet_belt_x           9.19
+## roll_belt            100.000
+## pitch_forearm         59.809
+## yaw_belt              54.351
+## pitch_belt            45.919
+## magnet_dumbbell_z     43.763
+## roll_forearm          43.518
+## magnet_dumbbell_y     43.318
+## accel_dumbbell_y      22.405
+## roll_dumbbell         18.299
+## magnet_dumbbell_x     17.987
+## accel_forearm_x       17.502
+## accel_belt_z          14.588
+## magnet_belt_z         14.427
+## accel_dumbbell_z      13.935
+## magnet_forearm_z      13.907
+## total_accel_dumbbell  13.199
+## magnet_belt_y         12.330
+## yaw_arm               11.810
+## gyros_belt_z          11.176
+## magnet_belt_x          9.191
 ```
 
 ```r
@@ -494,11 +546,11 @@ trainingModel$finalModel
 ##         OOB estimate of  error rate: 0.79%
 ## Confusion matrix:
 ##      A    B    C    D    E class.error
-## A 3341    5    2    0    0    0.002091
-## B   16 2255    7    1    0    0.010531
-## C    0   10 2037    7    0    0.008277
-## D    0    1   27 1899    3    0.016062
-## E    1    2    2    9 2151    0.006467
+## A 3341    5    2    0    0 0.002090800
+## B   16 2255    7    1    0 0.010530935
+## C    0   10 2037    7    0 0.008276534
+## D    0    1   27 1899    3 0.016062176
+## E    1    2    2    9 2151 0.006466513
 ```
 
 **The estimated error rate is less than 1%.**
