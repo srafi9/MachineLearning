@@ -1,6 +1,6 @@
 ---
-title: 'Coursera: Practical Machine Learning Prediction Assignment'
-author: "Daniel Emaasit [GitHub](https://github.com/emaasit)"
+title: 'Practical Machine Learning Prediction Assignment'
+author: "Daniel Emaasit [GitHub](https://github.com/emaasit/MachineLearning)"
 output:
   html_document:
     keep_md: yes
