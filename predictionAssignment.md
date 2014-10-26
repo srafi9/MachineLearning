@@ -1,9 +1,9 @@
-# Coursera: Practical Machine Learning Prediction Assignment
-Daniel Emaasit [GitHub](https://github.com/emaasit)  
+# Practical Machine Learning Prediction Project
+Daniel Emaasit [GitHub](https://github.com/emaasit/MachineLearning)  
 
 
 ```
-## Run time: 2014-10-25 16:19:36
+## Run time: 2014-10-25 19:02:13
 ## R version: R version 3.0.2 (2013-09-25)
 ```
 
@@ -38,15 +38,11 @@ Daniel Emaasit [GitHub](https://github.com/emaasit)
 
 # Prepare the datasets
 
-Read the training data into a data table.
+Load the training data into a data table.
 
 
 ```r
-require(data.table)
-```
-
-```
-## Loading required package: data.table
+library(data.table)
 ```
 
 ```
@@ -59,7 +55,7 @@ url <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
 D <- fread(url)
 ```
 
-Read the testing data into a data table.
+Load the testing data into a data table.
 
 
 ```r
@@ -160,11 +156,7 @@ Split the dataset into a 60% training and 40% probing dataset.
 
 
 ```r
-require(caret)
-```
-
-```
-## Loading required package: caret
+library(caret)
 ```
 
 ```
@@ -246,10 +238,10 @@ Examine groups of prediction variables.
 histGroup <- function (data, regex) {
   col <- grep(regex, names(data))
   col <- c(col, which(names(data) == "classe"))
-  require(reshape2)
+  library(reshape2)
   n <- nrow(data)
   DMelted <- melt(data[, col, with=FALSE][, rownum := seq(1, n)], id.vars=c("rownum", "classe"))
-  require(ggplot2)
+  library(ggplot2)
   ggplot(DMelted, aes(x=classe, y=value)) +
     geom_violin(aes(color=classe, fill=classe), alpha=1/2) +
 #     geom_jitter(aes(color=classe, fill=classe), alpha=1/10) +
@@ -261,10 +253,6 @@ histGroup <- function (data, regex) {
     theme(legend.position="none")
 }
 histGroup(DTrainCS, "belt")
-```
-
-```
-## Loading required package: reshape2
 ```
 
 ```
@@ -302,19 +290,8 @@ Set up the parallel clusters.
 
 
 ```r
-require(parallel)
-```
-
-```
-## Loading required package: parallel
-```
-
-```r
-require(doParallel)
-```
-
-```
-## Loading required package: doParallel
+library(parallel)
+library(doParallel)
 ```
 
 ```
@@ -375,7 +352,7 @@ system.time(trainingModel <- train(classe ~ ., data=DTrainCS, method=method))
 
 ```
 ##    user  system elapsed 
-##   46.36    2.61 1678.73
+##   46.86    0.39 1102.53
 ```
 
 Stop the clusters.
@@ -407,9 +384,9 @@ trainingModel
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa  Accuracy SD  Kappa SD
-##    2    0.986     0.982  0.00170      0.00216 
-##   27    0.987     0.984  0.00178      0.00226 
-##   52    0.978     0.972  0.00466      0.00590 
+##    2    0.986     0.982  0.00163      0.00206 
+##   27    0.987     0.984  0.00158      0.00200 
+##   52    0.977     0.971  0.00438      0.00555 
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was mtry = 27.

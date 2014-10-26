@@ -11,7 +11,7 @@ output:
 message(sprintf("Run time: %s\nR version: %s", Sys.time(), R.Version()$version.string))
 ```
 
-> **Background**
+> **Background Information**
 
 > Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: http://groupware.les.inf.puc-rio.br/har (see the section on the Weight Lifting Exercise Dataset). 
 
@@ -40,7 +40,7 @@ message(sprintf("Run time: %s\nR version: %s", Sys.time(), R.Version()$version.s
 > Due to security concerns with the exchange of R code, your code will not be run during the evaluation by your classmates. Please be sure that if they download the repo, they will be able to view the compiled HTML version of your analysis. 
 
 
-# Prepare the datasets
+# Prepare the data
 
 Load the training data into a data table.
 
@@ -58,8 +58,6 @@ url <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
 DTest <- fread(url)
 ```
 
-Which variables in the test dataset have zero `NA`s?
-Use this tip: [finding columns with all missing values in r](http://stackoverflow.com/a/11330265).
 
 Belt, arm, dumbbell, and forearm variables that do not have any missing values in the test dataset will be **predictor candidates**.
 
@@ -86,13 +84,13 @@ D <- D[, classe := factor(D[, classe])]
 D[, .N, classe]
 ```
 
-Split the dataset into a 60% training and 40% probing dataset.
+Split the dataset into a 70% training and 30% probing dataset.
 
 ```{r}
 library(caret)
 seed <- as.numeric(as.Date("2014-10-26"))
 set.seed(seed)
-inTrain <- createDataPartition(D$classe, p=0.6)
+inTrain <- createDataPartition(D$classe, p=0.7)
 DTrain <- D[inTrain[[1]]]
 DProbe <- D[-inTrain[[1]]]
 ```
@@ -122,6 +120,7 @@ nzv <- nearZeroVar(DTrainCS, saveMetrics=TRUE)
 if (any(nzv$nzv)) nzv else message("No variables with near zero variance")
 ```
 
+<<<<<<< HEAD
 Examine groups of prediction variables.
 
 ```{r histGroup}
@@ -147,6 +146,8 @@ histGroup(DTrainCS, "[^(fore)]arm")
 histGroup(DTrainCS, "dumbbell")
 histGroup(DTrainCS, "forearm")
 ```
+=======
+>>>>>>> update
 
 
 # Train a prediction model
